@@ -1,4 +1,4 @@
-package com.will.hi.library.hilibrary
+package com.will.library.hilibrary
 
 import org.junit.Test
 
