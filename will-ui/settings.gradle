@@ -1,0 +1,5 @@
+rootProject.name='will-ui'
+include ':app', ':will-ui'
+
+include ':hi-library'
+project(':hi-library').projectDir = "../hi-library/hilibrary" as File
