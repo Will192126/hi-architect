@@ -1,3 +1,0 @@
-rootProject.name='hi-ui'
-include ':app'
-include ':hi-ui'
