@@ -1,4 +1,4 @@
-package com.will.library.hilibrary.log;
+package com.will.library.log;
 
 import android.graphics.Color;
 import android.view.Gravity;
@@ -9,7 +9,7 @@ import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.will.library.hilibrary.util.HiDisplayUtil;
+import com.will.library.util.WiDisplayUtil;
 
 public class HiViewPrinterProvider {
     private FrameLayout rootView;
@@ -38,7 +38,7 @@ public class HiViewPrinterProvider {
         floatingView.setTag(TAG_FLOATING_VIEW);
         floatingView.setBackgroundColor(Color.BLACK);
         floatingView.setAlpha(0.8f);
-        params.bottomMargin = HiDisplayUtil.dp2px(100, recyclerView.getContext().getResources());
+        params.bottomMargin = WiDisplayUtil.dp2px(100, recyclerView.getContext().getResources());
         rootView.addView(floatingView, params);
     }
 
@@ -71,7 +71,7 @@ public class HiViewPrinterProvider {
 
         FrameLayout.LayoutParams params =
                 new FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
-                        HiDisplayUtil.dp2px(160, rootView.getContext().getResources()));
+                        WiDisplayUtil.dp2px(160, rootView.getContext().getResources()));
         params.gravity = Gravity.BOTTOM;
         View logView = getLogView();
         logView.setTag(TAG_LOG_VIEW);

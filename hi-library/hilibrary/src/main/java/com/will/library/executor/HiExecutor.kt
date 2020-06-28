@@ -1,8 +1,8 @@
-package com.will.library.hilibrary.executor
+package com.will.library.executor
 
 import android.os.Handler
 import android.os.Looper
-import com.will.library.hilibrary.log.HiLog
+import com.will.library.log.HiLog
 import java.util.concurrent.*
 import java.util.concurrent.atomic.AtomicLong
 import java.util.concurrent.locks.Condition

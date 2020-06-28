@@ -1,4 +1,4 @@
-package com.will.library.hilibrary.log;
+package com.will.library.log;
 
 import android.app.Activity;
 import android.view.LayoutInflater;
@@ -11,7 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.will.hi.library.hilibrary.R;
+import com.will.library.R;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -1,4 +1,4 @@
-package com.will.library.hilibrary.log;
+package com.will.library.log;
 
 import java.text.SimpleDateFormat;
 import java.util.Locale;

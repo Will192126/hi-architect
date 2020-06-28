@@ -9,7 +9,7 @@ import android.view.WindowManager;
 
 import androidx.annotation.NonNull;
 
-public class HiDisplayUtil {
+public class WiDisplayUtil {
     public static int dp2px(float dp, Resources resources) {
         return (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp, resources.getDisplayMetrics());
     }

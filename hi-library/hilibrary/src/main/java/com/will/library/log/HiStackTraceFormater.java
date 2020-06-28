@@ -1,4 +1,4 @@
-package com.will.library.hilibrary.log;
+package com.will.library.log;
 
 public class HiStackTraceFormater implements HiLogFormater<StackTraceElement[]> {
     @Override

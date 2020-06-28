@@ -1,4 +1,4 @@
-package com.will.library.hilibrary.log;
+package com.will.library.log;
 
 public abstract class HiLogConfig {
     static int MAX_LEN = 512;
