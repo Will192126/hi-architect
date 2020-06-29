@@ -5,3 +5,4 @@ include ':will-library'
 project(':will-library').projectDir = "../will-library/will-library" as File
 include ':will-ui'
 project(':will-ui').projectDir = "../will-ui/will-ui" as File
+include ':common'
