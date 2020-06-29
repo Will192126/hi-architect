@@ -1,6 +1,7 @@
 package com.will.willshop.logic;
 
 import android.content.res.Resources;
+import android.os.Bundle;
 import android.view.View;
 
 import androidx.annotation.IdRes;
@@ -29,11 +30,21 @@ public class MainActivityLogic {
     private WiTabBottomLayout mTabBottomLayout;
     private List<HiTabBottomInfo<?>> mInfoList;
     private ActivityProvider mActivityProvider;
-    private int currentItemIndex;
+    private final static String SAVED_CURRENT_ID = "SAVED_CURRENT_ID";
+    private int mCurrentItemIndex;
 
-    public MainActivityLogic(ActivityProvider provider) {
+    public MainActivityLogic(ActivityProvider provider, Bundle savedInstanceState) {
+        //fix 不保留活动导致的Fragment重叠问题
+        if (savedInstanceState != null) {
+            mCurrentItemIndex = savedInstanceState.getInt(SAVED_CURRENT_ID);
+        }
+
         mActivityProvider = provider;
         initTabBottom();
+    }
+
+    public void onSaveInstanceState(@NonNull Bundle outState) {
+        outState.putInt(SAVED_CURRENT_ID, mCurrentItemIndex);
     }
 
     public WiFragmentTabView getFragmentTabView() {
@@ -114,9 +125,10 @@ public class MainActivityLogic {
             @Override
             public void onTabSelectedChange(int index, @Nullable HiTabBottomInfo<?> preInfo, @NonNull HiTabBottomInfo<?> nextInfo) {
                 mFragmentTabView.setCurrentPosition(index);
+                mCurrentItemIndex = index;
             }
         });
-        mTabBottomLayout.defaultSelected(infoHome);
+        mTabBottomLayout.defaultSelected(mInfoList.get(mCurrentItemIndex));
     }
 
     private void initFragmentTabView() {
