@@ -1,4 +1,4 @@
-package com.will.common.ui;
+package com.will.common.ui.component;
 
 import android.os.Bundle;
 

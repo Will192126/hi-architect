@@ -3,7 +3,7 @@
     package="com.will.common">
 
     <application>
-        <activity android:name=".ui.WiBaseActivity"></activity>
+        <activity android:name=".ui.component.WiBaseActivity"></activity>
     </application>
 
 </manifest>
