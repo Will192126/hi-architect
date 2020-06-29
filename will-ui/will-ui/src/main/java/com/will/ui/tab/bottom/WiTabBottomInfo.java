@@ -4,7 +4,7 @@ import android.graphics.Bitmap;
 
 import androidx.fragment.app.Fragment;
 
-public class HiTabBottomInfo<Color> {
+public class WiTabBottomInfo<Color> {
     public enum TabType {
         BITMAP, ICON
     }
@@ -22,14 +22,14 @@ public class HiTabBottomInfo<Color> {
 
     public TabType tabType;
 
-    public HiTabBottomInfo(String name, Bitmap defaultBitmap, Bitmap selectedBitmap) {
+    public WiTabBottomInfo(String name, Bitmap defaultBitmap, Bitmap selectedBitmap) {
         this.name = name;
         this.defaultBitmap = defaultBitmap;
         this.selectedBitmap = selectedBitmap;
         this.tabType = TabType.BITMAP;
     }
 
-    public HiTabBottomInfo(String name, String iconFont, String defaultIconName, String selectedIconName, Color defaultColor, Color selectedColor) {
+    public WiTabBottomInfo(String name, String iconFont, String defaultIconName, String selectedIconName, Color defaultColor, Color selectedColor) {
         this.name = name;
         this.iconFont = iconFont;
         this.defaultIconName = defaultIconName;

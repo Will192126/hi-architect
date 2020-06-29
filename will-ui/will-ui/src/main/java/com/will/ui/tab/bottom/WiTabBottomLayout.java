@@ -24,11 +24,11 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-public class WiTabBottomLayout extends FrameLayout implements IHiTabLayout<HiTabBottom, HiTabBottomInfo<?>> {
+public class WiTabBottomLayout extends FrameLayout implements IHiTabLayout<WiTabBottom, WiTabBottomInfo<?>> {
     private static final String TAG_TAB_BOTTOM = "TAG_TAB_BOTTOM";
 
-    private List<OnTabSelectedListener<HiTabBottomInfo<?>>> tabSelectedChangeListeners = new ArrayList<>();
-    private HiTabBottomInfo<?> selectedInfo;
+    private List<OnTabSelectedListener<WiTabBottomInfo<?>>> tabSelectedChangeListeners = new ArrayList<>();
+    private WiTabBottomInfo<?> selectedInfo;
     private float bottomAlpha = 1f;
     //TabBottom高度
     private static float tabBottomHeight = 50;
@@ -36,7 +36,7 @@ public class WiTabBottomLayout extends FrameLayout implements IHiTabLayout<HiTab
     private float bottomLineHeight = 0.5f;
     //TabBottom的头部线条颜色
     private String bottomLineColor = "#dfe0e1";
-    private List<HiTabBottomInfo<?>> infoList;
+    private List<WiTabBottomInfo<?>> infoList;
 
     public WiTabBottomLayout(@NonNull Context context) {
         super(context);
@@ -51,14 +51,14 @@ public class WiTabBottomLayout extends FrameLayout implements IHiTabLayout<HiTab
     }
 
     @Override
-    public HiTabBottom findTab(@NonNull HiTabBottomInfo<?> data) {
+    public WiTabBottom findTab(@NonNull WiTabBottomInfo<?> data) {
         ViewGroup fl = findViewWithTag(TAG_TAB_BOTTOM);
         for (int i = 0; i < fl.getChildCount(); i++) {
             View child = fl.getChildAt(i);
-            if (child instanceof HiTabBottom) {
-                HiTabBottom hiTabBottom = (HiTabBottom) child;
-                if (hiTabBottom.getTabInfo() == data) {
-                    return hiTabBottom;
+            if (child instanceof WiTabBottom) {
+                WiTabBottom tabBottom = (WiTabBottom) child;
+                if (tabBottom.getTabInfo() == data) {
+                    return tabBottom;
                 }
             }
         }
@@ -66,17 +66,17 @@ public class WiTabBottomLayout extends FrameLayout implements IHiTabLayout<HiTab
     }
 
     @Override
-    public void addTabSelectedChangeListener(OnTabSelectedListener<HiTabBottomInfo<?>> listener) {
+    public void addTabSelectedChangeListener(OnTabSelectedListener<WiTabBottomInfo<?>> listener) {
         tabSelectedChangeListeners.add(listener);
     }
 
     @Override
-    public void defaultSelected(@NonNull HiTabBottomInfo<?> defaultInfo) {
+    public void defaultSelected(@NonNull WiTabBottomInfo<?> defaultInfo) {
         onSelected(defaultInfo);
     }
 
     @Override
-    public void inflateInfo(@NonNull List<HiTabBottomInfo<?>> infoList) {
+    public void inflateInfo(@NonNull List<WiTabBottomInfo<?>> infoList) {
         if (infoList.isEmpty()) {
             return;
         }
@@ -86,9 +86,9 @@ public class WiTabBottomLayout extends FrameLayout implements IHiTabLayout<HiTab
         for (int i = getChildCount() - 1; i > 0; i--) {
             removeViewAt(i);
         }
-        Iterator<OnTabSelectedListener<HiTabBottomInfo<?>>> iterator = tabSelectedChangeListeners.iterator();
+        Iterator<OnTabSelectedListener<WiTabBottomInfo<?>>> iterator = tabSelectedChangeListeners.iterator();
         while (iterator.hasNext()) {
-            if (iterator.next() instanceof HiTabBottom) {
+            if (iterator.next() instanceof WiTabBottom) {
                 iterator.remove();
             }
         }
@@ -102,12 +102,12 @@ public class WiTabBottomLayout extends FrameLayout implements IHiTabLayout<HiTab
         int width = WiDisplayUtil.getDisplayWidthInPx(getContext()) / infoList.size();
         int height = WiDisplayUtil.dp2px(tabBottomHeight, getResources());
         for (int i = 0; i < infoList.size(); i++) {
-            final HiTabBottomInfo<?> info = infoList.get(i);
+            final WiTabBottomInfo<?> info = infoList.get(i);
             LayoutParams params = new LayoutParams(width, height);
             params.gravity = Gravity.BOTTOM;
             params.leftMargin = i * width;
 
-            HiTabBottom tabBottom = new HiTabBottom(getContext());
+            WiTabBottom tabBottom = new WiTabBottom(getContext());
             tabSelectedChangeListeners.add(tabBottom);
             tabBottom.setHiTabInfo(info);
             fl.addView(tabBottom, params);
@@ -152,15 +152,15 @@ public class WiTabBottomLayout extends FrameLayout implements IHiTabLayout<HiTab
         bottomLine.setAlpha(bottomAlpha);
     }
 
-    private void onSelected(@NonNull HiTabBottomInfo<?> nextInfo) {
-        for (OnTabSelectedListener<HiTabBottomInfo<?>> listener : tabSelectedChangeListeners) {
+    private void onSelected(@NonNull WiTabBottomInfo<?> nextInfo) {
+        for (OnTabSelectedListener<WiTabBottomInfo<?>> listener : tabSelectedChangeListeners) {
             listener.onTabSelectedChange(infoList.indexOf(nextInfo), selectedInfo, nextInfo);
         }
         this.selectedInfo = nextInfo;
     }
 
     private void addBackground() {
-        View view = LayoutInflater.from(getContext()).inflate(R.layout.hi_bottom_layout_bg, null);
+        View view = LayoutInflater.from(getContext()).inflate(R.layout.wi_bottom_layout_bg, null);
         LayoutParams params = new LayoutParams(LayoutParams.MATCH_PARENT, WiDisplayUtil.dp2px(tabBottomHeight, getResources()));
         params.gravity = Gravity.BOTTOM;
         addView(view, params);

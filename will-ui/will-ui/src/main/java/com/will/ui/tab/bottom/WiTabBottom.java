@@ -17,27 +17,27 @@ import androidx.annotation.NonNull;
 import com.will.ui.R;
 import com.will.ui.tab.common.IHiTab;
 
-public class HiTabBottom extends RelativeLayout implements IHiTab<HiTabBottomInfo<?>> {
-    private HiTabBottomInfo<?> tabInfo;
+public class WiTabBottom extends RelativeLayout implements IHiTab<WiTabBottomInfo<?>> {
+    private WiTabBottomInfo<?> tabInfo;
     private ImageView tabImageView;
     private TextView tabIconView;
     private TextView tabNameView;
 
-    public HiTabBottom(Context context) {
+    public WiTabBottom(Context context) {
         this(context, null, 0);
     }
 
-    public HiTabBottom(Context context, AttributeSet attrs) {
+    public WiTabBottom(Context context, AttributeSet attrs) {
         this(context, attrs, 0);
     }
 
-    public HiTabBottom(Context context, AttributeSet attrs, int defStyleAttr) {
+    public WiTabBottom(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         init(context);
     }
 
     @Override
-    public void setHiTabInfo(@NonNull HiTabBottomInfo<?> data) {
+    public void setHiTabInfo(@NonNull WiTabBottomInfo<?> data) {
         tabInfo = data;
         inflateInfo(false, true);
     }
@@ -51,7 +51,7 @@ public class HiTabBottom extends RelativeLayout implements IHiTab<HiTabBottomInf
     }
 
     @Override
-    public void onTabSelectedChange(int index, @NonNull HiTabBottomInfo<?> preInfo, @NonNull HiTabBottomInfo<?> nextInfo) {
+    public void onTabSelectedChange(int index, @NonNull WiTabBottomInfo<?> preInfo, @NonNull WiTabBottomInfo<?> nextInfo) {
         if (preInfo != tabInfo && nextInfo != tabInfo || preInfo == nextInfo) {
             return;
         }
@@ -62,7 +62,7 @@ public class HiTabBottom extends RelativeLayout implements IHiTab<HiTabBottomInf
         }
     }
 
-    public HiTabBottomInfo<?> getTabInfo() {
+    public WiTabBottomInfo<?> getTabInfo() {
         return tabInfo;
     }
 
@@ -79,14 +79,14 @@ public class HiTabBottom extends RelativeLayout implements IHiTab<HiTabBottomInf
     }
 
     private void init(Context context) {
-        LayoutInflater.from(context).inflate(R.layout.hi_tab_bottom, this);
+        LayoutInflater.from(context).inflate(R.layout.wi_tab_bottom, this);
         tabImageView = findViewById(R.id.iv_image);
         tabIconView = findViewById(R.id.tv_icon);
         tabNameView = findViewById(R.id.tv_name);
     }
 
     private void inflateInfo(boolean isSelected, boolean isInit) {
-        if (tabInfo.tabType == HiTabBottomInfo.TabType.ICON) {
+        if (tabInfo.tabType == WiTabBottomInfo.TabType.ICON) {
             if (isInit) {
                 tabImageView.setVisibility(GONE);
                 tabIconView.setVisibility(VISIBLE);
@@ -106,7 +106,7 @@ public class HiTabBottom extends RelativeLayout implements IHiTab<HiTabBottomInf
                 tabIconView.setTextColor(getTextColor(tabInfo.defaultColor));
                 tabNameView.setTextColor(getTextColor(tabInfo.defaultColor));
             }
-        } else if (tabInfo.tabType == HiTabBottomInfo.TabType.BITMAP) {
+        } else if (tabInfo.tabType == WiTabBottomInfo.TabType.BITMAP) {
             if (isInit) {
                 tabIconView.setVisibility(GONE);
                 tabImageView.setVisibility(VISIBLE);

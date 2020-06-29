@@ -1,13 +1,12 @@
 package com.will.hi_ui.demo.tab
 
-import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
 import com.will.hi_ui.R
 import com.will.library.util.WiDisplayUtil
-import com.will.ui.tab.bottom.HiTabBottomInfo
+import com.will.ui.tab.bottom.WiTabBottomInfo
 import com.will.ui.tab.bottom.WiTabBottomLayout
 
 class WiTabBottomDemoActivity : AppCompatActivity() {
@@ -22,9 +21,9 @@ class WiTabBottomDemoActivity : AppCompatActivity() {
     private fun initTabBottom() {
         val tabBottomLayout: WiTabBottomLayout = findViewById(R.id.tab_bottom_layout)
         tabBottomLayout.setTabAlpha(0.85f)
-        val bottomInfoList:MutableList<HiTabBottomInfo<*>> = ArrayList()
+        val bottomInfoList:MutableList<WiTabBottomInfo<*>> = ArrayList()
 
-        val homeInfo = HiTabBottomInfo(
+        val homeInfo = WiTabBottomInfo(
             "首页",
             "fonts/iconfont.ttf",
             getString(R.string.if_home),
@@ -33,7 +32,7 @@ class WiTabBottomDemoActivity : AppCompatActivity() {
             "#ffd44949"
         )
 
-        val recommendInfo = HiTabBottomInfo(
+        val recommendInfo = WiTabBottomInfo(
             "首页",
             "fonts/iconfont.ttf",
             getString(R.string.if_recommend),
@@ -52,13 +51,13 @@ class WiTabBottomDemoActivity : AppCompatActivity() {
 //        )
 
         val bitmap = BitmapFactory.decodeResource(resources, R.drawable.fire, null)
-        val profileInfo = HiTabBottomInfo<String>(
+        val profileInfo = WiTabBottomInfo<String>(
             "首页",
             bitmap,
             bitmap
         )
 
-        val categoryInfo = HiTabBottomInfo(
+        val categoryInfo = WiTabBottomInfo(
             "首页",
             "fonts/iconfont.ttf",
             getString(R.string.if_category),
@@ -67,7 +66,7 @@ class WiTabBottomDemoActivity : AppCompatActivity() {
             "#ffd44949"
         )
 
-        val favoriteInfo = HiTabBottomInfo(
+        val favoriteInfo = WiTabBottomInfo(
             "首页",
             "fonts/iconfont.ttf",
             getString(R.string.if_favorite),
