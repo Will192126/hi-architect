@@ -1,6 +1,7 @@
 package com.will.ui.tab.top;
 
 import android.content.Context;
+import android.graphics.Rect;
 import android.util.AttributeSet;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,6 +10,7 @@ import android.widget.LinearLayout;
 
 import androidx.annotation.NonNull;
 
+import com.will.library.util.WiDisplayUtil;
 import com.will.ui.tab.bottom.WiTabBottom;
 import com.will.ui.tab.bottom.WiTabBottomInfo;
 import com.will.ui.tab.common.IHiTab;
@@ -19,11 +21,10 @@ import java.util.Iterator;
 import java.util.List;
 
 public class WiTabTopLayout extends HorizontalScrollView implements IHiTabLayout<WiTabTop, WiTabTopInfo<?>> {
-    private static final String TAG_TAB_TOP = "TAG_TAB_TOP";
-
     private List<OnTabSelectedListener<WiTabTopInfo<?>>> tabSelectedChangeListeners = new ArrayList<>();
     private WiTabTopInfo<?> mSelectedInfo;
     private List<WiTabTopInfo<?>> mInfoList;
+    private int tabWidth;
 
     public WiTabTopLayout(Context context) {
         this(context, null, 0);
@@ -43,7 +44,7 @@ public class WiTabTopLayout extends HorizontalScrollView implements IHiTabLayout
         ViewGroup ll = getRootLayout(false);
         for (int i = 0; i < ll.getChildCount(); i++) {
             View child = ll.getChildAt(i);
-            if (child instanceof WiTabBottom) {
+            if (child instanceof WiTabTop) {
                 WiTabTop tabTop = (WiTabTop) child;
                 if (tabTop.getTabInfo() == data) {
                     return tabTop;
@@ -102,6 +103,83 @@ public class WiTabTopLayout extends HorizontalScrollView implements IHiTabLayout
             listener.onTabSelectedChange(mInfoList.indexOf(nextInfo), mSelectedInfo, nextInfo);
         }
         this.mSelectedInfo = nextInfo;
+
+        autoScroll(nextInfo);
+    }
+
+    private void autoScroll(WiTabTopInfo<?> nextInfo) {
+        WiTabTop tabTop = findTab(nextInfo);
+        if (null == tabTop) {
+            return;
+        }
+        int index = mInfoList.indexOf(nextInfo);
+        int[] loc = new int[2];
+        tabTop.getLocationInWindow(loc);
+
+        if (0 == tabWidth) {
+            tabWidth = tabTop.getWidth();
+        }
+
+        int scrollDistance;
+        // 判断滚动方向
+        if ((loc[0] + tabWidth / 2) > WiDisplayUtil.getDisplayWidthInPx(getContext()) / 2) {
+            scrollDistance = getScrollDistance(index, 2);
+        } else {
+            scrollDistance = getScrollDistance(index, -2);
+        }
+        scrollTo(getScrollX() + scrollDistance, 0);
+    }
+
+    /**
+     * 获取滚动距离
+     *
+     * @param index
+     * @param step
+     * @return
+     */
+    private int getScrollDistance(int index, int step) {
+        int distance = 0;
+        for (int i = 0; i <= Math.abs(step); i++) {
+            int next;
+            if (step < 0) {
+                next = step + i + index;
+            } else {
+                next = step - i + index;
+            }
+
+            if (next >= 0 && next < mInfoList.size()) {
+                if (step < 0) {
+                    distance -= getDistance(next, false);
+                } else {
+                    distance += getDistance(next, true);
+                }
+            }
+        }
+        return distance;
+    }
+
+    private int getDistance(int index, boolean toRight) {
+        WiTabTop tabTop = findTab(mInfoList.get(index));
+        if (null == tabTop) {
+            return 0;
+        }
+
+        Rect rect = new Rect();
+        tabTop.getLocalVisibleRect(rect);
+        if (toRight) {
+            if (rect.right > tabWidth) { // 完全没有展示
+                return tabWidth;
+            } else { // 部分展示
+                return tabWidth - rect.right;
+            }
+        } else {
+            if (tabWidth <= -rect.left) { // 完全没有展示
+                return tabWidth;
+            } else if (rect.left > 0){ // 部分展示
+                return rect.left;
+            }
+        }
+        return 0;
     }
 
     private LinearLayout getRootLayout(boolean clear) {
