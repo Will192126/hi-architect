@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.TextView
+import com.will.hi_ui.demo.refresh.WiRefreshActivity
 import com.will.hi_ui.demo.tab.WiTabBottomDemoActivity
 import com.will.hi_ui.demo.tab.WiTabTopDemoActivity
 
@@ -18,6 +19,8 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         tvTabBottomDemo.setOnClickListener(this)
         val tvTabTopDemo = findViewById<TextView>(R.id.tab_top_demo)
         tvTabTopDemo.setOnClickListener(this)
+        val tvRefreshDemo = findViewById<TextView>(R.id.refresh_demo)
+        tvRefreshDemo.setOnClickListener(this)
     }
 
     override fun onClick(v: View?) {
@@ -27,6 +30,9 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
             }
             R.id.tab_top_demo -> {
                 startActivity(Intent(this, WiTabTopDemoActivity::class.java))
+            }
+            R.id.refresh_demo -> {
+                startActivity(Intent(this, WiRefreshActivity::class.java))
             }
         }
     }
