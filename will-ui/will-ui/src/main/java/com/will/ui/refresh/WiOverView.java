@@ -7,6 +7,8 @@ import android.widget.FrameLayout;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import com.will.library.util.WiDisplayUtil;
+
 public abstract class WiOverView extends FrameLayout {
     enum RefreshState {
         /**
@@ -35,7 +37,7 @@ public abstract class WiOverView extends FrameLayout {
     /**
      * 触发下拉刷新的最小高度
      */
-    public int mPullRefreshHeight;
+    public int pullRefreshHeight;
     /**
      * 最小阻尼
      */
@@ -46,15 +48,21 @@ public abstract class WiOverView extends FrameLayout {
     public float maxDamp = 2.2f;
 
     public WiOverView(@NonNull Context context) {
-        super(context);
+        this(context, null, 0);
     }
 
     public WiOverView(@NonNull Context context, @Nullable AttributeSet attrs) {
-        super(context, attrs);
+        this(context, attrs, 0);
     }
 
     public WiOverView(@NonNull Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
+        preInit();
+    }
+
+    protected void preInit() {
+        pullRefreshHeight = WiDisplayUtil.dp2px(66, getResources());
+        init();
     }
 
     public abstract void init();

@@ -12,6 +12,6 @@ public interface IWiRefresh {
     interface RefreshListener {
         void onRefresh();
 
-        boolean enableRefresh(boolean enable);
+        boolean enableRefresh();
     }
 }

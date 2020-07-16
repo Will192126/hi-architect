@@ -4,6 +4,9 @@ import android.content.Context;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.view.animation.LinearInterpolator;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -41,21 +44,25 @@ public class WiTextOverView extends WiOverView {
 
     @Override
     protected void onVisible() {
-
+        mTextView.setText("下拉刷新");
     }
 
     @Override
     public void onOver() {
-
+        mTextView.setText("松开刷新");
     }
 
     @Override
     public void onRefresh() {
-
+        mTextView.setText("正在刷新");
+        Animation animation = AnimationUtils.loadAnimation(getContext(), R.anim.rotate_anim);
+        LinearInterpolator interpolator = new LinearInterpolator();
+        animation.setInterpolator(interpolator);
+        mImageView.setAnimation(animation);
     }
 
     @Override
     void onFinish() {
-
+        mImageView.clearAnimation();
     }
 }
