@@ -1,4 +1,4 @@
-package com.will.ui.banner;
+package com.will.ui.banner.core;
 
 import android.app.Activity;
 import android.content.Context;
@@ -114,7 +114,8 @@ public class WiViewPager extends ViewPager {
 
         // 下一个索引大于adapter的最大数量时重新开始
         if (nextPosition >= getAdapter().getCount()) {
-            //TODO 获取第一个item的索引
+            // 获取第一个item的索引
+            nextPosition = ((WiBannerAdapter) getAdapter()).getFirstItemPosition();
         }
         setCurrentItem(nextPosition, true);
         return nextPosition;
