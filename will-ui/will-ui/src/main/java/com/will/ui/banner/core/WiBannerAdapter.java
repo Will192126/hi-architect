@@ -85,9 +85,6 @@ public class WiBannerAdapter extends PagerAdapter {
             realPosition = position % getRealCount();
         }
         WiBannerViewHolder viewHolder = mCachedViews.get(realPosition);
-        if (container.equals(viewHolder.rootView.getParent())) {
-            container.removeView(viewHolder.rootView);
-        }
         onBind(viewHolder, mModels.get(realPosition), realPosition);
         if (viewHolder.rootView.getParent() != null) {
             ((ViewGroup) viewHolder.rootView.getParent()).removeView(viewHolder.rootView);
